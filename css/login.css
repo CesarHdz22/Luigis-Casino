@@ -1,0 +1,18 @@
+
+.login-container {
+    width: 350px;
+}
+
+.register-link {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.register-link a {
+    color: var(--accent-green);
+}
+
+.login-container input{
+    height: 20px;
+}
