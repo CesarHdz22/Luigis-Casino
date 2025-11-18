@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luigi's Casino - Inicio</title>
+    <title>Luigi's Casino - Juego</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="css/juego.css">
     <link rel="shortcut icon" href="css/assets/iconoLuigi.png">
 </head>
 <body>
@@ -20,15 +20,13 @@
     </header>
 
     <main class="casino-menu">
-        <h2 class="title">Elige tu juego</h2>
-
-        <div class="game-options">
-            <a href="mesas.php?juego=memorama" class="btn">🧠 Memorama</a>
-            <a href="mesas.php?juego=texas" class="btn">♠️ Poker Texas Hold'em</a>
-            <a href="mesas.php?juego=omaha" class="btn">♦️ Poker Omaha</a>
-            <a href="mesas.php?juego=minijuego" class="btn">🎮 Minijuego Especial</a>
+        <div class="carta negro active">
+            <span class="valor">A</span>
+            <span class="palo">♠</span>
         </div>
     </main>
+
+
 
 </body>
 </html>

@@ -1,0 +1,53 @@
+.carta {
+    width: 90px;
+    height: 130px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    transition: transform 0.2s;
+    overflow: hidden;
+}
+
+.carta.active {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.carta.active:hover {
+    transform: scale(1.07);
+}
+
+.carta:not(.active) {
+    background: linear-gradient(135deg, #b00000, #ff3b3b);
+    border: 2px solid #880000;
+}
+
+.carta:not(.active) .valor,
+.carta:not(.active) .palo {
+    display: none;
+}
+
+.carta.active .valor {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.carta.active .palo {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carta.rojo.active .valor,
+.carta.rojo.active .palo {
+    color: red;
+}
+
+.carta.negro.active .valor,
+.carta.negro.active .palo {
+    color: black;
+}
