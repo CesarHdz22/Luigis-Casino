@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;   /* IMPORTANTE */
+    position: relative;
 }
 
 
@@ -14,8 +14,8 @@
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    z-index: 9999; /* 🔥 Encima de todo */
+    width: 250px;
+    z-index: 9999; 
     pointer-events: none;
 }
 
@@ -24,7 +24,7 @@
     width: 100%;
     display: block;
     border-radius: 12px;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.5s ease;
 }
 
@@ -120,4 +120,27 @@
 #p3 { top: 120px; right: -40px; }
 #p4 { top: 120px; left: -40px; }
 #p5 { bottom: 50px; left: -40px; }
-#p6 { top: -40px; left: 50%; transform: translateX(-50%); }
+
+.card-anim {
+    width: 60px;
+    height: 85px;
+    background: red;       /* fondo oculto por defecto */
+    border-radius: 6px;
+    position: absolute;
+    top: 20px;             /* posición inicial dealer */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.8s ease;  /* animación suave */
+    z-index: 100;
+}
+
+.card-slot.red {
+    color: red;
+}
+
+.card-slot.black {
+    color: black;
+}

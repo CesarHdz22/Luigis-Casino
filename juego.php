@@ -95,16 +95,6 @@
                             <button class="join-btn">Unirme</button>
                         </div>
 
-                        <!-- Player 6 -->
-                        <div class="player" id="p6">
-                            <div class="seat-box">Jugador 6</div>
-                            <div class="hand">
-                                <div class="card-slot"></div>
-                                <div class="card-slot"></div>
-                            </div>
-                            <button class="join-btn">Unirme</button>
-                        </div>
-
                     </div>
                 </div>
 
@@ -117,4 +107,15 @@
 
 
 </body>
+<script src="js/texas.js"></script>
+<script>
+    // Inicializa el mazo y jugadores
+    mezclarMazo(mazo);
+
+    
+
+
+    // Para probar animación de reparto
+    repartirConAnimacion();
+</script>
 </html>
