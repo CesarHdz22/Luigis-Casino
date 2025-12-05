@@ -1,53 +1,123 @@
-.carta {
-    width: 90px;
-    height: 130px;
-    border-radius: 10px;
-    border: 2px solid #ccc;
-    font-family: 'Segoe UI', sans-serif;
-    position: relative;
-    transition: transform 0.2s;
-    overflow: hidden;
+.mesa-container {
+    width: 100%;
+    height: calc(100vh - 140px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;   /* IMPORTANTE */
 }
 
-.carta.active {
+
+/* --- DEALER VIDEO --- */
+#dealer-area {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    z-index: 9999; /* 🔥 Encima de todo */
+    pointer-events: none;
+}
+
+
+#dealer-video {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#dealer-video.active {
+    opacity: 1;
+}
+
+/* --- MESA --- */
+.mesa {
+    width: 900px;
+    height: 550px;
+    background: #074d25;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.felt {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* --- CARTAS COMUNITARIAS --- */
+.center-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.community {
+    display: flex;
+    gap: 10px;
+}
+
+.card-slot {
+    width: 60px;
+    height: 85px;
     background: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pot {
+    text-align: center;
+    margin-top: 8px;
+    color: white;
+}
+
+/* --- JUGADORES --- */
+.player {
+    width: 150px;
+    height: 120px;
+    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 8px;
+    align-items: center;
 }
 
-.carta.active:hover {
-    transform: scale(1.07);
-}
-
-.carta:not(.active) {
-    background: linear-gradient(135deg, #b00000, #ff3b3b);
-    border: 2px solid #880000;
-}
-
-.carta:not(.active) .valor,
-.carta:not(.active) .palo {
-    display: none;
-}
-
-.carta.active .valor {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.carta.active .palo {
-    font-size: 40px;
+.seat-box {
+    width: 100%;
+    padding: 6px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    color: white;
     text-align: center;
-    margin-top: 10px;
 }
 
-.carta.rojo.active .valor,
-.carta.rojo.active .palo {
-    color: red;
+.hand {
+    width: 100%;
+    height: 45px;
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
 
-.carta.negro.active .valor,
-.carta.negro.active .palo {
-    color: black;
+.join-btn {
+    margin-top: 6px;
+    padding: 6px 12px;
+    background: gold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
+
+/* POSICIONES */
+#p1 { bottom: -40px; left: 50%; transform: translateX(-50%); }
+#p2 { bottom: 50px; right: -40px; }
+#p3 { top: 120px; right: -40px; }
+#p4 { top: 120px; left: -40px; }
+#p5 { bottom: 50px; left: -40px; }
+#p6 { top: -40px; left: 50%; transform: translateX(-50%); }
