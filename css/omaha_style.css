@@ -1,0 +1,420 @@
+/* ======== RESET GENERAL (Mantenido) ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background: #0b3b2e; /* verde casino */
+    color: #f1f1f1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+/* --- HEADER (Mantenido) --- */
+.casino-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #063524;
+    border-bottom: 2px solid #0e5a3a;
+}
+
+.casino-title {
+    font-size: 1.8rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.username strong {
+    color: #ffd700; /* Oro */
+}
+
+/* ======== LOBBY (Mantenido) ======== */
+.lobby {
+    max-width: 450px;
+    margin: 6rem auto;
+    padding: 2rem;
+    background: #063524;
+    border: 2px solid #0e5a3a;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.lobby input {
+    width: 100%;
+    padding: 12px;
+    margin: 1rem 0;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    color: #000;
+}
+
+.lobby button {
+    background: #198754;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    border: none;
+    font-size: 18px;
+}
+
+.lobby button:hover {
+    background: #146c43;
+}
+
+/* ======== TABLERO DEL JUEGO (Mesa Principal) ======== */
+.omaha-table-view {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem; /* Más compacto */
+}
+
+.table-area {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* --- MESA CENTRAL (Efecto Ovalado/Tapete) --- */
+.mesa {
+    /* Ovalo de póker */
+    background: #084d38; 
+    border-radius: 50%;
+    border: 8px solid #0e5a3a;
+    padding: 20px;
+    width: 75vw; /* Reducido al 75% del ancho de la vista */
+    max-width: 1000px; /* Reducido */
+    height: 60vh; /* Reducido */
+    max-height: 500px; /* Reducido */
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+
+    /* Adaptación a la forma ovalada */
+    transform: scaleX(1.3) scaleY(0.9); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.felt {
+    /* El tapete interior, compensa la transformación */
+    background: #0d7051;
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    position: relative;
+    transform: scaleX(0.77) scaleY(1.1); /* Compensación */
+}
+
+
+/* --- ZONA CENTRAL: Cartas y Pozo --- */
+.center-area {
+    position: absolute; /* Posicionado sobre el felt */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente para resaltar */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* ======== CARTAS ======== */
+.community-cards, #holeCards {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card, .card-slot {
+    width: 45px;
+    height: 65px;/* Mantenemos el tamaño, pero revisa si necesitas más altura */
+    border-radius: 4px;
+    
+    /* CAMBIOS CLAVE: */
+    display: flex;
+    flex-direction: column; /* Apila el rango sobre el palo */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #000;
+}
+
+.card-slot {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed #3fad3f;
+}
+
+/* --- ESTILO ESPECIAL PARA LAS CARTAS DEL JUGADOR LOCAL --- */
+.player-hand-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* Alinea las cartas a la base */
+    margin-top: 0; /* Elimina cualquier espacio superior innecesario */
+}
+
+/* Reducimos el padding y eliminamos el text-align si es necesario */
+.hand-zone {
+    text-align: center; /* Ya no debe estar centrado */
+    padding: 0; /* Quitamos el padding excesivo de 1rem */
+}
+
+.balance-display {
+    /* Mantenemos el estilo de fuente, pero quitamos el margin-top si lo tiene */
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.hand-label {
+    font-size: 0.8rem;
+    color: #ccc;
+    margin-bottom: 5px;
+}
+
+#holeCards {
+    /* Asegura que las cartas de mano estén siempre centradas horizontalmente */
+    display: flex;
+    gap: 8px; /* Espacio entre las 4 cartas */
+    border-radius: 6px;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.3); /* Fondo sutil para agrupar las cartas */
+}
+/* ---------------------------------------------------------------------- */
+
+
+/* ======== CONTROLES DE JUGADOR (Parte Inferior) ======== */
+.controls {
+    margin-top: 0rem;
+    padding: 1.5rem;
+    background: #063524;
+    border-radius: 12px;
+    border: 2px solid #0e5a3a;
+    display: flex;
+    justify-content: space-between; /* <-- Clave: distribuye info (izquierda) y acciones (derecha) */
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 20;
+}
+
+.pot {
+    font-size: 1.4rem;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ffd700; /* Oro para el pozo total */
+    text-shadow: 1px 1px 2px #000;
+}
+
+
+.hand-zone p {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+/* --- Botones --- */
+.actions button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    min-width: 100px;
+    color: white;
+    font-weight: bold;
+}
+
+#btnFold {
+    background: #dc3545; /* Rojo de emergencia */
+}
+#btnFold:hover {
+    background: #a71e2b;
+}
+
+#btnCheck {
+    background: #198754; /* Verde acción */
+}
+#btnCheck:hover {
+    background: #146c43;
+}
+
+#btnBet {
+    background: #c58900; /* Dorado acción */
+}
+#btnBet:hover {
+    background: #a17200;
+}
+
+.bet-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+}
+
+#betAmount {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    width: 100px;
+    color: #000;
+}
+
+/* ======== LISTA DE JUGADORES (Sentados en la mesa) ======== */
+
+/* Contenedor que posiciona a los jugadores alrededor del óvalo */
+.players-list {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    list-style: none; /* Quitamos viñetas si lo haces con <ul> */
+    padding: 0;
+    margin: 0;
+}
+
+.player {
+    /* Estilo del asiento del jugador */
+    position: absolute;
+    padding: 8px 10px;
+    width: 150px; /* Ancho para info */
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    border-radius: 10px;
+    border: 2px solid #ffd700; /* Borde de oro */
+    box-shadow: 0 0 5px #000;
+    z-index: 5;
+}
+
+.player-info {
+    font-size: 0.9rem;
+}
+
+.player-info-container {
+    display: flex;
+    align-items: flex-end; /* Alinea los elementos en la base */
+    gap: 30px; /* Espacio entre las 4 cartas y la etiqueta Dinero */
+}
+
+.player-stack {
+    color: #3fad3f;
+    font-weight: bold;
+}
+
+/* --- Ejemplo de Posicionamiento (Máximo 9 jugadores) --- */
+/*
+Para que sea multijugador, la lógica JS debe asignar las clases de posición (p.ej., .seat-1, .seat-2)
+*/
+
+.player.active-turn {
+    /* Indicador visual de quién está actuando */
+    border: 3px solid #dc3545; /* Rojo intenso */
+    box-shadow: 0 0 10px #dc3545;
+}
+
+/* ======== MOBILE RESPONSIVE (Mantenido) ======== */
+@media (max-width: 768px) {
+    .mesa {
+        /* Altura proporcional más ajustada en móvil */
+        width: 100%;
+        padding-top: 80%; /* Altura 80% del ancho */
+        transform: none;
+        max-height: 400px;
+    }
+    .felt {
+        transform: none;
+        border-radius: 15px;
+    }
+    .controls {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    .actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    .actions button {
+        width: 100%;
+        min-width: unset;
+    }
+    .bet-input-group {
+        width: 100%;
+    }
+    #betAmount {
+        width: 100%;
+    }
+    .player {
+        width: 100px; /* Más pequeño en móvil */
+    }
+}
+
+.player {
+    /* Estilo base del jugador (ya definido) */
+    position: absolute;
+}
+
+/* 9 Asientos alrededor del óvalo (ajustados para el transform) */
+
+.seat-1 { top: 90%; left: 50%; transform: translate(-50%, -50%); } /* Jugador local */
+.seat-2 { top: 75%; left: 15%; transform: translate(-50%, -50%); }
+.seat-3 { top: 40%; left: 5%; transform: translate(-50%, -50%); }
+.seat-4 { top: 10%; left: 25%; transform: translate(-50%, -50%); }
+.seat-5 { top: 0%; left: 50%; transform: translate(-50%, -50%); } /* Top Center */
+.seat-6 { top: 10%; left: 75%; transform: translate(-50%, -50%); }
+.seat-7 { top: 40%; left: 95%; transform: translate(-50%, -50%); }
+.seat-8 { top: 75%; left: 85%; transform: translate(-50%, -50%); }
+
+.join-btn {
+    margin-top: 5px;
+    background: #198754 !important;
+    padding: 5px 8px !important;
+    font-size: 0.8rem !important;
+    border-radius: 5px !important;
+}
