@@ -25,7 +25,7 @@
         <div class="game-options">
             <a href="mesas.php?juego=memorama" class="btn">🧠 Memorama</a>
             <a href="mesas.php?juego=texas" class="btn">♠️ Poker Texas Hold'em</a>
-            <a href="mesas.php?juego=omaha" class="btn">♦️ Poker Omaha</a>
+            <a href="omaha_lobby.php" class="btn">♦️ Poker Omaha</a>
             <a href="mesas.php?juego=minijuego" class="btn">🎮 Minijuego Especial</a>
         </div>
     </main>

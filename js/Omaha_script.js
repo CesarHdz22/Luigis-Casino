@@ -1,10 +1,5 @@
-// CASINO/js/omaha_script.js
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ==============================================
-       === VARIABLES GLOBALES Y ESTADO DEL JUEGO ===
-       ============================================== */
     const playerNameDisplay = document.getElementById("playerNameDisplay");
     if (!playerNameDisplay) return;
 
@@ -15,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const communityEl = document.getElementById("community");
     const betAmountInput = document.getElementById('betAmount');
     
-    // Estado interno del juego (Simulación)
     let playerStack = parseInt(balanceEl.textContent) || 1000;
     let currentPot = 0;
     let minBet = 10;
@@ -25,13 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const SIMULATED_COMMUNITY = ['Qd', 'Jc', '3s']; 
     
-    // Variables para referenciar el asiento del jugador
     let seatElement = null; 
     let seatInfoElement = null; 
 
-    /* ==============================================
-       === VARIABLES Y LÓGICA DE CARTAS ===
-       ============================================== */
     const suits = ['♥', '♦', '♣', '♠'];
     const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
 
@@ -63,9 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return dealHand(deck, 4); 
     }
     
-    /* ==============================================
-       === LOBBY Y REDIRECCIÓN (Mantenido) ===
-       ============================================== */
     const joinBtnLobby = document.getElementById('joinBtn');
     if (joinBtnLobby) {
         joinBtnLobby.addEventListener('click', () => {
@@ -78,24 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==============================================
-       === FUNCIONES DE RENDERIZADO RÁPIDO ===
-       ============================================== */
-
     function updateDisplay() {
-        // 1. Actualiza Saldo (barra de control inferior)
         balanceEl.textContent = playerStack; 
         
-        // 2. Actualiza Pozo Total
         potEl.textContent = currentPot;
         
-        // 3. Actualiza Stack en el asiento (NUEVA LÓGICA)
         if (gameActive && seatInfoElement) {
             seatInfoElement.innerHTML = 
                 `<strong>${PLAYER_NAME}</strong><br>Stack: $${playerStack}`;
         }
         
-        // 4. Actualiza botón Call/Check
         document.getElementById('btnCheck').textContent = (currentPot > 0 && minBet > 0) ? `Call $${minBet}` : 'Check';
     }
 
@@ -105,35 +84,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const div = document.createElement("div");
         div.classList.add("card");
         
-        // Asume que la carta viene en formato "RankSuit" (ej: "A♥")
-        const rank = card.substring(0, card.length - 1); // El Rank (A, K, T, 2)
-        const suit = card.charAt(card.length - 1);       // El Suit (♥, ♦, ♣, ♠)
+        const rank = card.substring(0, card.length - 1); 
+        const suit = card.charAt(card.length - 1); 
 
-        // --- Configuración interna del DIV para apilar Rango y Palo ---
         div.style.display = 'flex';
         div.style.flexDirection = 'column';
         div.style.justifyContent = 'space-between';
         div.style.alignItems = 'center';
-        div.style.padding = '3px 0'; // Pequeño relleno para que no se pegue al borde
+        div.style.padding = '3px 0'; 
 
-        // 1. Elemento para el Rango (ej: K)
         const rankEl = document.createElement("span");
         rankEl.textContent = rank;
         rankEl.style.fontSize = '1.2rem';
-        rankEl.style.fontWeight = 'bold'; // Asegura que el rango se vea fuerte
+        rankEl.style.fontWeight = 'bold'; 
         div.appendChild(rankEl);
         
-        // 2. Elemento para el Palo (ej: ♥)
         const suitEl = document.createElement("span");
         suitEl.textContent = suit;
         suitEl.style.fontSize = '0.7rem';
         div.appendChild(suitEl);
         
-        // 3. Aplicar color (al div padre, que se hereda a los spans)
         if (suit === '♦' || suit === '♥') {
-            div.style.color = '#dc3545'; // Rojo
+            div.style.color = '#dc3545'; 
         } else {
-            div.style.color = '#000000'; // Negro
+            div.style.color = '#000000'; 
         }
 
         element.appendChild(div);
@@ -150,48 +124,40 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cards[i]) {
             div.classList.add("card");
             
-            // Asume formato "RankSuit" (ej: "Qd", "Jc")
             const cardValue = cards[i];
             const rank = cardValue.substring(0, cardValue.length - 1); 
-            // Usamos los símbolos reales de palo para el renderizado
             let suit = cardValue.charAt(cardValue.length - 1); 
             
-            // Mapeo simple de letras simuladas a símbolos reales si es necesario
             if (suit === 'd') suit = '♦'; 
             else if (suit === 'c') suit = '♣'; 
             else if (suit === 'h') suit = '♥';
             else if (suit === 's') suit = '♠';
 
             
-            // --- Configuración interna del DIV para apilar Rango y Palo ---
             div.style.display = 'flex';
             div.style.flexDirection = 'column';
             div.style.justifyContent = 'space-between';
             div.style.alignItems = 'center';
             div.style.padding = '3px 0';
 
-            // 1. Elemento para el Rango (ej: Q)
             const rankEl = document.createElement("span");
             rankEl.textContent = rank;
             rankEl.style.fontSize = '1.2rem';
             rankEl.style.fontWeight = 'bold';
             div.appendChild(rankEl);
             
-            // 2. Elemento para el Palo (ej: ♦)
             const suitEl = document.createElement("span");
             suitEl.textContent = suit;
             suitEl.style.fontSize = '0.7rem';
             div.appendChild(suitEl);
 
-            // 3. Aplicar color (Rojo si es diamante o corazón)
             if (suit === '♦' || suit === '♥') {
-                div.style.color = '#dc3545'; // Rojo
+                div.style.color = '#dc3545'; 
             } else {
-                div.style.color = '#000000'; // Negro
+                div.style.color = '#000000'; 
             }
 
         } else {
-            // Si no hay carta (Turn o River no repartidos)
             div.classList.add("card-slot");
         }
         communityEl.appendChild(div);
@@ -199,9 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
-    /* ==============================================
-       === MANEJO DE ASIENTO Y REPARTO (SIMULADO) ===
-       ============================================== */
     const joinButtons = document.querySelectorAll('.join-btn');
     const seat1Button = document.querySelector('.join-btn[data-seat="1"]');
 
@@ -215,39 +178,29 @@ document.addEventListener('DOMContentLoaded', () => {
             playerSeatId = seatId;
             gameActive = true;
 
-            // Almacenar referencias al asiento del jugador local
             seatElement = document.querySelector(`.seat-${seatId}`);
             seatInfoElement = seatElement ? seatElement.querySelector('.player-info') : null;
 
 
-            // 1. Ocultar todos los botones de unirse
             joinButtons.forEach(btn => btn.style.display = 'none');
             
-            // 2. Ocupar visualmente el asiento 1
             if (seatElement) {
                 seatElement.style.borderColor = '#ffd700';
             }
             
-            // 3. Reparto de Cartas de Mano ALEATORIAS (4 cartas)
             playerHand = getNewRandomHand(); 
             renderCards(holeEl, playerHand);
 
-            // 4. Simular Flop (3 cartas comunitarias)
             renderCommunity(SIMULATED_COMMUNITY);
 
-            // 5. Inicializar el pozo y la ciega (simulada)
             currentPot = 20;
-            playerStack -= 10; // Paga Small Blind simulado
+            playerStack -= 10; 
             minBet = 10; 
             
-            updateDisplay(); // Actualiza ambos saldos (barra inferior y stack del asiento)
+            updateDisplay(); 
             alert(`¡Te uniste al Asiento 1! Tu mano: ${playerHand.join(', ')}`);
         });
     }
-
-    /* ==============================================
-       === ACCIONES DE JUGADOR (Simulado) ===
-       ============================================== */
 
     document.getElementById('btnFold').onclick = () => {
         if (!gameActive) return;
@@ -260,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!gameActive) return;
 
         if (minBet > 0) {
-            // Call
+            
             const callAmount = minBet;
             if (playerStack >= callAmount) {
                 playerStack -= callAmount;
@@ -271,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("No tienes suficiente dinero para Call.");
             }
         } else {
-            // Check
+            
             alert("Check: Pasaste la acción.");
         }
         updateDisplay(); 
@@ -299,9 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    /* ==============================================
-       === INICIALIZACIÓN (Mantenido) ===
-       ============================================== */
     updateDisplay(); 
 
 });
